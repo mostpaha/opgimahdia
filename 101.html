@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ديوان OPGI مهدية — نظام التحصيل الذكي V21</title>
+<title>ديوان OPGI مهدية — نظام التحصيل الذكي V22</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
@@ -70,14 +70,14 @@ header{background:linear-gradient(135deg,#0d1b2a,#1a237e,#1565c0);height:56px;di
 .lang-btn.active{background:var(--g);color:var(--n)}
 
 /* TABS */
-.tabs{background:var(--cd);border-bottom:2px solid var(--bd);display:flex;padding:0 10px;overflow-x:auto;position:sticky;top:56px;z-index:90}
+.tabs{background:var(--cd);border-bottom:2px solid var(--bd);display:flex;padding:0 10px;overflow-x:auto;position:sticky;top:80px;z-index:90}
 .tabs::-webkit-scrollbar{height:0}
 .tab{padding:0 10px;height:40px;cursor:pointer;font-size:11px;font-weight:700;border-bottom:3px solid transparent;color:var(--mu);transition:.15s;white-space:nowrap;display:flex;align-items:center;gap:5px}
 .tab:hover{color:var(--b)}.tab.active{color:var(--b);border-bottom-color:var(--g)}
 .tnb{background:var(--re);color:#fff;border-radius:8px;padding:0 5px;font-size:9px;font-weight:900;min-width:16px;text-align:center}
 
 /* COMMUNE BAR — شريط البلديات */
-#communeBar{background:linear-gradient(135deg,#f8faff,#eef2ff);border-bottom:1.5px solid var(--bd);padding:6px 14px;display:flex;align-items:center;gap:6px;overflow-x:auto;position:sticky;top:117px;z-index:88;flex-wrap:nowrap}
+#communeBar{background:linear-gradient(135deg,#f8faff,#eef2ff);border-bottom:1.5px solid var(--bd);padding:6px 14px;display:flex;align-items:center;gap:6px;overflow-x:auto;position:sticky;top:141px;z-index:88;flex-wrap:nowrap}
 #communeBar::-webkit-scrollbar{height:3px}
 #communeBar::-webkit-scrollbar-thumb{background:var(--bd);border-radius:3px}
 body.dark #communeBar{background:linear-gradient(135deg,#0f172a,#1e2d4a)}
@@ -1066,7 +1066,7 @@ main{padding:14px 18px 52px}
       <img id="opgiLogoLogin" src="" style="width:90px;height:90px;object-fit:contain;border-radius:50%;background:rgba(255,255,255,.95);padding:5px;box-shadow:0 6px 24px rgba(0,0,0,.5)">
       <div style="color:#fff;font-size:14px;font-weight:900;margin-top:10px">ديوان الترقية و التسيير العقاري</div>
       <div style="color:var(--g2);font-size:12px;font-weight:700">وحدة مهدية — تيارت</div>
-      <div style="color:rgba(255,255,255,.4);font-size:10px;margin-top:2px">نظام التحصيل الذكي — TAHSIL v21</div>
+      <div style="color:rgba(255,255,255,.4);font-size:10px;margin-top:2px">نظام التحصيل الذكي — TAHSIL v22</div>
     </div>
 
     <div style="border-top:1px solid rgba(255,255,255,.12);margin-bottom:18px"></div>
@@ -1132,7 +1132,7 @@ main{padding:14px 18px 52px}
   <div class="hlogo">
     <div class="hicon">💳</div>
     <div class="htxt">
-      <div class="t1">نظام التحصيل الذكي V21</div>
+      <div class="t1">نظام التحصيل الذكي V22</div>
       <div class="t2">OPGI Mahdia — Gestion Intelligente 2025 ✨</div>
     </div>
   </div>
@@ -1162,11 +1162,30 @@ main{padding:14px 18px 52px}
     <button class="btn br sm" onclick="confirmLogout()" title="خروج">🚪</button>
     <button class="btn br sm" onclick="showSecLog()" title="سجل الأمان — محاولات الاختراق" style="font-size:10px">🔒</button>
     <button class="btn bor sm" onclick="openSecSettings()" title="إعدادات الأمان" style="font-size:10px">⚙️🛡️</button>
+    <button id="v22SecBtn" onclick="V22.showAudit()" title="مركز الأمان + التحديثات V22"
+      style="background:rgba(156,39,176,.45);border:1.5px solid rgba(156,39,176,.6);color:#e1bee7;border-radius:5px;padding:0 8px;height:26px;font-family:Tajawal,sans-serif;font-size:10px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:3px;white-space:nowrap">
+      🛡️V22
+    </button>
     <button class="btn bg sm" onclick="openPayModal()">➕ <span id="lbl-newpay">دفعة جديدة</span></button>
     <button class="btn bgh sm" onclick="openBulkModal()">📢 <span id="lbl-bulk">جماعي</span></button>
     <button class="btn bor sm" onclick="generatePDFReport()" title="تقرير PDF">📄 PDF</button>
   </div>
 </header>
+
+<!-- ══ شريط التحديث V22 ══ -->
+<div id="updateBar" style="background:linear-gradient(135deg,#0d1b2a,#1a237e);border-bottom:1.5px solid rgba(201,168,76,.3);padding:4px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;position:sticky;top:56px;z-index:98;font-family:Tajawal,sans-serif;direction:rtl">
+  <div style="display:flex;align-items:center;gap:8px">
+    <span style="font-size:11px;color:rgba(255,255,255,.4)">الإصدار</span>
+    <span style="font-size:11px;font-weight:900;color:#ffd54f;letter-spacing:1px">V22.0</span>
+    <span id="updBarStatus" style="font-size:10px;color:rgba(255,255,255,.35)">● جاري الفحص...</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:6px">
+    <span id="updBarLastCheck" style="font-size:9px;color:rgba(255,255,255,.25)"></span>
+    <button onclick="V22.checkUpdate(true)" id="updBarBtn"
+      style="padding:2px 10px;height:20px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.35);border-radius:5px;color:#ffd54f;font-family:Tajawal,sans-serif;font-size:9px;font-weight:700;cursor:pointer"
+    >🔍 فحص</button>
+  </div>
+</div>
 
 <div class="tabs">
   <div class="tab active" onclick="go('dashboard',0)">📊 <span class="tl" data-key="tab-dash">لوحة التحكم</span></div>
@@ -2389,10 +2408,10 @@ function resetPwd(){
 // ═══════════════════════════════════════════════════
 
 // ─── الإعدادات الثابتة للحماية ───
-const SEC_LICENSE = 'OPGI-2025-MHDIA-TIART'; // مفتاح التفعيل
-const SEC_USER    = 'admin';                   // اسم المستخدم
-const SEC_PIN     = '246810';                  // PIN 6 أرقام
-const SEC_ANSWER  = 'مهدية';                   // إجابة السؤال الأمني
+const SEC_LICENSE = '1234'; // مفتاح التفعيل
+const SEC_USER    = '123321';                   // اسم المستخدم
+const SEC_PIN     = '123';                  // PIN 6 أرقام
+const SEC_ANSWER  = '123';                   // إجابة السؤال الأمني
 const CAPTCHA_WORDS = ['أمان','دخول','تيارت','مهدية','OPGI','تحقق','نظام'];
 let   CURRENT_LAYER = 1;
 let   FAIL_COUNT    = 0;
@@ -3024,6 +3043,40 @@ function openSecSettings(){
       <button onclick="document.getElementById('secSettingsPop').remove()" style="background:none;border:none;color:#fff;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:16px">✕</button>
     </div>
     <div style="padding:18px;display:flex;flex-direction:column;gap:14px;max-height:80vh;overflow-y:auto">
+
+      <!-- ══ V22: التحديث التلقائي ══ -->
+      <div style="background:linear-gradient(135deg,#e8f5e9,#f1f8e9);border-radius:12px;padding:14px;border:1px solid #a5d6a7">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <div style="font-size:12px;font-weight:900;color:#2e7d32">🔄 التحديث التلقائي — V22</div>
+          <span style="font-size:9px;background:#2e7d32;color:#fff;border-radius:5px;padding:2px 7px;font-weight:700">جديد</span>
+        </div>
+        <div style="font-size:10px;color:#388e3c;margin-bottom:10px;line-height:1.8;background:rgba(46,125,50,.08);border-radius:8px;padding:8px 10px">
+          ✅ يفحص تلقائياً كل 6 ساعات عند وجود إنترنت<br>
+          ✅ عند انقطاع الإنترنت — البرنامج يعمل عادياً بدون أي تأخير<br>
+          ✅ عند وجود تحديث تظهر إشعار أسفل الشاشة<br>
+          📡 الرابط الحالي: <b style="font-family:monospace;word-break:break-all">${localStorage.getItem('opgi_update_url')||'غير محدد بعد'}</b>
+        </div>
+        <div style="display:flex;gap:7px">
+          <button onclick="V22.checkUpdate(true)" style="flex:1;padding:8px;background:linear-gradient(135deg,#2e7d32,#43a047);border:none;border-radius:8px;font-family:Tajawal,sans-serif;font-size:11px;font-weight:700;color:#fff;cursor:pointer">🔍 فحص الآن</button>
+          <button onclick="(function(){document.getElementById('secSettingsPop').remove();V22.checkUpdate(false)||setTimeout(()=>{const b=document.getElementById('v22UpdBanner');if(!b)V22.checkUpdate(true);},100);})()" style="flex:1;padding:8px;background:rgba(46,125,50,.15);border:1.5px solid #a5d6a7;border-radius:8px;font-family:Tajawal,sans-serif;font-size:11px;font-weight:700;color:#2e7d32;cursor:pointer">⚙️ إعداد الرابط</button>
+        </div>
+      </div>
+
+      <!-- ══ V22: مركز الحماية ══ -->
+      <div style="background:linear-gradient(135deg,#f3e5f5,#ede7f6);border-radius:12px;padding:14px;border:1px solid #ce93d8">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <div style="font-size:12px;font-weight:900;color:#6a1b9a">🛡️ الحماية المتقدمة V22</div>
+          <span style="font-size:9px;background:#6a1b9a;color:#fff;border-radius:5px;padding:2px 7px;font-weight:700">نشط</span>
+        </div>
+        <div style="font-size:10px;color:#7b1fa2;line-height:1.9;background:rgba(106,27,154,.07);border-radius:8px;padding:8px 10px;margin-bottom:10px">
+          🔐 منع تصدير البيانات (F12, Ctrl+S, Ctrl+A على الجدول)<br>
+          📸 كشف وتسجيل Print Screen مع تنبيه Telegram<br>
+          💾 نسخة احتياطية تلقائية كل 20 دقيقة (offline ✅)<br>
+          🔍 كشف أي تغيير غير مصرح به في البيانات<br>
+          🔒 قفل تلقائي عند تبديل التبويب 20 دقيقة
+        </div>
+        <button onclick="document.getElementById('secSettingsPop').remove();V22.showAudit()" style="width:100%;padding:8px;background:linear-gradient(135deg,#6a1b9a,#7b1fa2);border:none;border-radius:8px;font-family:Tajawal,sans-serif;font-size:11px;font-weight:700;color:#fff;cursor:pointer">📋 عرض سجل الأمان الكامل</button>
+      </div>
 
       <!-- ══ قسم بيانات الدخول ══ -->
       <div style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border-radius:12px;padding:14px;border:1px solid #bfdbfe">
@@ -9718,6 +9771,456 @@ function showSecretPanel(title, color, content) {
   document.body.appendChild(panel);
 }
 
+
+// ╔══════════════════════════════════════════════════════════════════╗
+// ║          OPGI مهدية — V22  نظام الحماية والتحديث الكامل         ║
+// ║  يعمل offline دائماً | الحماية والتحديث يعملان عند وجود إنترنت  ║
+// ╚══════════════════════════════════════════════════════════════════╝
+const V22 = (function(){
+
+  const VER   = '22.0';
+  const SALT  = 'OPGI_MHDIA_V22_2025';
+
+  // ── أداة: هل الإنترنت متاح؟ (غير مُعطِّل) ──────────────────────
+  function isOnline(){ return navigator.onLine; }
+
+  // ── سجل الأمان (في الذاكرة فقط — يُمسح بإغلاق المتصفح) ─────────
+  const _auditLog = [];
+  function log(type, detail){
+    _auditLog.push({ t: new Date().toLocaleString('ar-DZ'), type, detail: String(detail||'').slice(0,120) });
+    if(_auditLog.length > 200) _auditLog.shift();
+  }
+
+  // ── تنبيه Telegram (صامت — لا يعطل شيئاً أبداً) ─────────────────
+  function tgAlert(msg){
+    if(!isOnline()) return;
+    const tok = localStorage.getItem('tahsil_tg_token');
+    const cid = localStorage.getItem('tahsil_tg_chat');
+    if(!tok || !cid) return;
+    fetch('https://api.telegram.org/bot'+tok+'/sendMessage',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ chat_id:cid,
+        text:'🛡️ OPGI مهدية V22\n' + msg + '\n⏰ ' + new Date().toLocaleString('ar-DZ') })
+    }).catch(()=>{});
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  //  1.  التحديث التلقائي
+  //      - يفحص كل 6 ساعات عند وجود إنترنت
+  //      - offline → لا يفعل شيئاً، البرنامج يعمل بشكل طبيعي
+  // ════════════════════════════════════════════════════════════════
+  const DEFAULT_UPDATE_URL = 'https://raw.githubusercontent.com/mostpaha/opgimahdia/master/version.json';
+
+  async function checkUpdate(manual){
+    const url = localStorage.getItem('opgi_update_url') || DEFAULT_UPDATE_URL;
+    if(!url){ if(manual) _setupUpdateUrl(); return; }
+    if(!isOnline()){
+      if(manual) toast('📶 لا يوجد اتصال بالإنترنت — التحديث يعمل عند الاتصال', 3000);
+      return;
+    }
+    const lastCheck = +localStorage.getItem('opgi_upd_check')||0;
+    if(!manual && (Date.now()-lastCheck) < 6*3600000) return;
+    localStorage.setItem('opgi_upd_check', String(Date.now()));
+    _setBarStatus('⏳ جاري الفحص...', '#ffd54f');
+    try{
+      const ctrl = new AbortController();
+      setTimeout(()=>ctrl.abort(), 6000);
+      const r = await fetch(url+'?v='+Date.now(), {cache:'no-store', signal:ctrl.signal});
+      if(!r.ok){ _setBarStatus('⚠️ تعذّر الاتصال', '#f87171'); return; }
+      const info = await r.json();
+      const now = new Date().toLocaleTimeString('ar-DZ');
+      const lastEl = document.getElementById('updBarLastCheck');
+      if(lastEl) lastEl.textContent = 'آخر فحص: ' + now;
+      if(info?.version && info.version !== VER){
+        _setBarStatus('🔴 تحديث متاح — V'+info.version, '#f87171');
+        _showUpdateBanner(info);
+      } else {
+        _setBarStatus('✅ أحدث إصدار — V'+VER, '#4ade80');
+        if(manual) toast('✅ البرنامج محدّث — الإصدار V'+VER, 3000);
+      }
+    }catch(e){
+      _setBarStatus('📶 لا يوجد اتصال', 'rgba(255,255,255,.3)');
+      if(manual) toast('⚠️ تعذّر الفحص — يُعاد المحاولة لاحقاً', 2500);
+    }
+  }
+
+  function _setBarStatus(msg, color){
+    const el = document.getElementById('updBarStatus');
+    if(el){ el.textContent = msg; el.style.color = color; }
+  }
+
+  function _showUpdateBanner(info){
+    document.getElementById('v22UpdBanner')?.remove();
+    const d = document.createElement('div');
+    d.id = 'v22UpdBanner';
+    d.style.cssText = 'position:fixed;bottom:48px;right:16px;z-index:99990;background:linear-gradient(135deg,#1b5e20,#2e7d32);color:#fff;border-radius:14px;padding:13px 16px;max-width:305px;box-shadow:0 8px 30px rgba(0,0,0,.45);font-family:Tajawal,sans-serif;direction:rtl;animation:mop .35s ease;border:1.5px solid rgba(255,255,255,.18)';
+    d.innerHTML = `
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:9px">
+        <span style="font-size:22px">🔄</span>
+        <div>
+          <div style="font-size:13px;font-weight:900">تحديث جديد — V${info.version||'??'}</div>
+          <div style="font-size:10px;opacity:.8">${info.notes||'تحسينات وإصلاحات'}</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:7px">
+        <button onclick="V22.downloadUpdate('${info.url||''}','${info.version||''}')"
+          style="flex:1;padding:8px 0;background:#fff;color:#1b5e20;border:none;border-radius:9px;font-family:Tajawal,sans-serif;font-size:12px;font-weight:900;cursor:pointer">⬇️ تحديث الآن</button>
+        <button onclick="document.getElementById('v22UpdBanner').remove()"
+          style="padding:8px 13px;background:rgba(255,255,255,.18);border:none;color:#fff;border-radius:9px;cursor:pointer;font-size:15px">✕</button>
+      </div>`;
+    document.body.appendChild(d);
+    setTimeout(()=>d.remove&&d.remove(), 45000);
+  }
+
+  async function downloadUpdate(url, version){
+    if(!url){ toast('⚠️ رابط التحديث غير محدد'); return; }
+    if(!isOnline()){ toast('📶 لا يوجد اتصال للتحديث الآن'); return; }
+    toast('⏳ جاري تحميل V'+version+'...', 8000);
+    try{
+      const ctrl = new AbortController();
+      setTimeout(()=>ctrl.abort(), 35000);
+      const r = await fetch(url+'?v='+Date.now(), {cache:'no-store', signal:ctrl.signal});
+      if(!r.ok) throw new Error('فشل الاتصال');
+      const html = await r.text();
+      const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'OPGI_Tiaret_V'+version+'.html';
+      a.click();
+      setTimeout(()=>URL.revokeObjectURL(a.href), 8000);
+      toast('✅ تم تنزيل V'+version+' — افتح الملف الجديد. بياناتك محفوظة تلقائياً.', 9000);
+      document.getElementById('v22UpdBanner')?.remove();
+      log('update_downloaded','V'+version);
+    }catch(e){ toast('❌ فشل التحميل: '+e.message, 4000); }
+  }
+
+  function _setupUpdateUrl(){
+    document.getElementById('v22UpdSetup')?.remove();
+    const cur = localStorage.getItem('opgi_update_url')||'';
+    const o = document.createElement('div');
+    o.id = 'v22UpdSetup';
+    o.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:99999;display:flex;align-items:center;justify-content:center;direction:rtl;font-family:Tajawal,sans-serif';
+    o.innerHTML = `
+    <div style="background:#0d1b2a;border:1.5px solid #1565c0;border-radius:16px;width:440px;max-width:96vw;padding:24px;color:#fff;box-shadow:0 20px 60px rgba(0,0,0,.6)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <div style="font-size:15px;font-weight:900">🔄 إعداد التحديث التلقائي</div>
+        <button onclick="document.getElementById('v22UpdSetup').remove()" style="background:rgba(255,255,255,.1);border:none;color:#fff;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:15px">✕</button>
+      </div>
+      <div style="font-size:11px;color:#90a0b8;margin-bottom:12px;line-height:1.9">
+        ضع رابط ملف <code style="background:rgba(255,255,255,.1);padding:1px 6px;border-radius:4px">version.json</code> على GitHub أو أي خادم:<br>
+        <code style="font-size:10px;background:rgba(255,255,255,.07);padding:5px 8px;border-radius:6px;display:block;margin-top:5px;direction:ltr">{"version":"22.1","url":"https://...app.html","notes":"وصف"}</code>
+      </div>
+      <input id="v22UpdInp" placeholder="https://raw.githubusercontent.com/.../version.json"
+        value="${cur}"
+        style="width:100%;padding:10px 12px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.18);border-radius:10px;color:#fff;font-size:11px;font-family:monospace;outline:none;box-sizing:border-box;direction:ltr;margin-bottom:12px">
+      <div style="display:flex;gap:8px">
+        <button onclick="(function(){const v=document.getElementById('v22UpdInp').value.trim();if(!v){toast('⚠️ أدخل الرابط');return;}localStorage.setItem('opgi_update_url',v);document.getElementById('v22UpdSetup').remove();toast('✅ تم حفظ رابط التحديث');V22.checkUpdate(true);})()"
+          style="flex:1;padding:10px;background:linear-gradient(135deg,#1565c0,#1976d2);border:none;border-radius:10px;color:#fff;font-family:Tajawal,sans-serif;font-size:13px;font-weight:900;cursor:pointer">💾 حفظ</button>
+        ${cur?`<button onclick="localStorage.removeItem('opgi_update_url');document.getElementById('v22UpdSetup').remove();toast('تم الحذف');"
+          style="padding:10px 14px;background:rgba(198,40,40,.3);border:1px solid rgba(198,40,40,.5);border-radius:10px;color:#f87171;font-family:Tajawal,sans-serif;font-size:12px;cursor:pointer">حذف</button>`:''}
+      </div>
+      <div style="margin-top:10px;font-size:10px;color:#546e7a;text-align:center">
+        📶 يعمل فقط عند وجود إنترنت — offline لا يتأثر البرنامج أبداً
+      </div>
+    </div>`;
+    document.body.appendChild(o);
+    setTimeout(()=>document.getElementById('v22UpdInp')?.focus(), 200);
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  //  2.  النسخ الاحتياطي التلقائي — كل 20 دقيقة (offline ✅)
+  // ════════════════════════════════════════════════════════════════
+  function autoBackup(){
+    try{
+      if(typeof SHEETS_META==='undefined' || !SHEETS_META?.length) return;
+      const snap = { _ts: new Date().toISOString(), _ver: VER };
+      SHEETS_META.forEach(s=>{
+        const d = localStorage.getItem('tahsil_sheet_'+s.name);
+        if(d) snap[s.name] = d;
+      });
+      snap._meta = JSON.stringify(SHEETS_META);
+      snap._pays = JSON.stringify(typeof PAYS!=='undefined' ? PAYS : []);
+      localStorage.setItem('v22_backup', JSON.stringify(snap));
+      localStorage.setItem('v22_backup_ts', snap._ts);
+      log('backup', SHEETS_META.map(s=>s.name).join('،'));
+      const dot = document.getElementById('saveDot');
+      if(dot) dot.title = 'آخر نسخة احتياطية: ' + new Date(snap._ts).toLocaleTimeString('ar-DZ');
+    }catch(e){}
+  }
+
+  function restoreBackup(){
+    const raw = localStorage.getItem('v22_backup');
+    if(!raw){ toast('⚠️ لا توجد نسخة احتياطية تلقائية بعد'); return; }
+    try{
+      const snap = JSON.parse(raw);
+      const ts = snap._ts ? new Date(snap._ts).toLocaleString('ar-DZ') : '—';
+      if(!confirm('📂 استعادة نسخة بتاريخ:\n'+ts+'\n\nسيتم استبدال البيانات الحالية — متأكد؟')) return;
+      if(snap._meta) localStorage.setItem('tahsil_sheets_meta', snap._meta);
+      Object.keys(snap).filter(k=>!k.startsWith('_')).forEach(k=>{
+        localStorage.setItem('tahsil_sheet_'+k, snap[k]);
+      });
+      log('restore', ts);
+      toast('✅ تمت الاستعادة — يُعاد تحميل البرنامج...', 3200);
+      setTimeout(()=>location.reload(), 3400);
+    }catch(e){ toast('❌ خطأ في الاستعادة: '+e.message); }
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  //  3.  حماية البيانات من الداخل
+  //      - منع حذف localStorage من الكونسول
+  //      - كشف أي تعديل مباشر على البيانات
+  //      - checksum دوري للبيانات الحساسة
+  // ════════════════════════════════════════════════════════════════
+  let _lastChecksum = 0;
+  function _calcChecksum(){
+    try{
+      if(typeof T==='undefined') return 0;
+      const str = T.map(t=>t.id+'|'+(+t.debt||0)+'|'+(+t.rent||0)).join(';');
+      let h = 0;
+      for(let i=0;i<str.length;i++) h = (Math.imul(31,h) + str.charCodeAt(i)) | 0;
+      return h;
+    }catch(e){ return 0; }
+  }
+
+  function _startIntegrityCheck(){
+    setInterval(()=>{
+      const cur = _calcChecksum();
+      if(_lastChecksum && _lastChecksum !== cur){
+        log('data_tamper','checksum تغيّر من خارج البرنامج');
+        tgAlert('⚠️ تحذير: تغيير غير معتاد في بيانات المستأجرين');
+      }
+      _lastChecksum = cur;
+    }, 15000);
+  }
+
+  // حماية localStorage من الحذف عبر الكونسول — Proxy بدلاً من defineProperty
+  (function guardStorage(){
+    const PROTECTED_KEYS = ['tahsil_','v22_backup','opgi_'];
+    const isProtected = k => PROTECTED_KEYS.some(p => String(k||'').startsWith(p));
+
+    const _orig = {
+      clear:      localStorage.clear.bind(localStorage),
+      removeItem: localStorage.removeItem.bind(localStorage),
+      setItem:    localStorage.setItem.bind(localStorage),
+    };
+
+    // منع clear — يمسح فقط المفاتيح غير المحمية
+    localStorage.clear = function(){
+      log('storage_clear','محاولة مسح localStorage بالكامل');
+      tgAlert('🚨 محاولة مسح بيانات النظام بالكامل!');
+      // نحمي مفاتيح OPGI ونسمح بحذف الباقي
+      const saved = {};
+      for(let i=0;i<localStorage.length;i++){
+        const k=localStorage.key(i);
+        if(isProtected(k)) saved[k]=localStorage.getItem(k);
+      }
+      _orig.clear();
+      Object.entries(saved).forEach(([k,v])=>_orig.setItem(k,v));
+      toast('🛡️ البيانات محمية من المسح',2500);
+    };
+
+    // منع removeItem على المفاتيح المحمية
+    localStorage.removeItem = function(key){
+      if(isProtected(key)){
+        log('storage_remove_blocked','محاولة حذف: '+key);
+        tgAlert('🚫 محاولة حذف مفتاح محمي: '+key);
+        toast('🛡️ هذا المفتاح محمي ولا يمكن حذفه',2000);
+        return;
+      }
+      _orig.removeItem(key);
+    };
+  })();
+
+  // ════════════════════════════════════════════════════════════════
+  //  4.  منع تصدير / سرقة البيانات
+  //      - منع نسخ لوحة المفاتيح لمحتوى الجداول الحساسة
+  //      - منع Ctrl+S (حفظ الصفحة كاملة)
+  //      - منع Print Screen بالكشف
+  //      - تشفير بيانات التصدير بكلمة مرور
+  // ════════════════════════════════════════════════════════════════
+  function _initDataProtection(){
+    // منع Ctrl+S (حفظ HTML من المتصفح)
+    document.addEventListener('keydown', e=>{
+      if(e.ctrlKey && e.key==='s' && !e.shiftKey){
+        // Ctrl+S العادي للبرنامج نسمح به (حفظ البيانات)
+        // نمنع فقط إذا لم يكن ضمن input/textarea
+        const tag=(e.target?.tagName||'').toUpperCase();
+        if(tag!=='INPUT'&&tag!=='TEXTAREA'){
+          e.preventDefault();
+          toast('💾 البيانات تُحفظ تلقائياً في النظام',2000);
+          if(typeof save==='function') save();
+          log('ctrl_s_blocked','محاولة حفظ HTML الصفحة');
+        }
+      }
+      // منع Ctrl+A على الجدول (تحديد كل البيانات للنسخ)
+      if(e.ctrlKey && e.key==='a'){
+        const tag=(e.target?.tagName||'').toUpperCase();
+        if(tag!=='INPUT'&&tag!=='TEXTAREA'){
+          e.preventDefault();
+          log('ctrl_a_blocked','محاولة تحديد كل البيانات');
+        }
+      }
+      // منع F12 / Ctrl+Shift+I,J,C / Ctrl+U
+      if(e.key==='F12' ||
+        (e.ctrlKey && e.shiftKey && 'IJC'.includes(e.key)) ||
+        (e.ctrlKey && !e.shiftKey && e.key==='u')){
+        e.preventDefault();
+        e.stopPropagation();
+        log('devtools_key', e.key);
+        tgAlert('⌨️ محاولة فتح أدوات المطور: '+e.key);
+      }
+    }, true);
+
+    // منع كليك يمين خارج الحقول
+    document.addEventListener('contextmenu', e=>{
+      const ok = e.target?.closest('input,textarea,select,#ctxMenu,.ctx-menu,.modal');
+      if(!ok){
+        e.preventDefault();
+        log('rightclick', e.target?.tagName||'');
+      }
+    });
+
+    // كشف Print Screen (لا يمكن منعه — لكن نسجّل ونُنبّه)
+    document.addEventListener('keyup', e=>{
+      if(e.key==='PrintScreen'){
+        log('screenshot','محاولة لقطة شاشة PrintScreen');
+        tgAlert('📸 تم أخذ لقطة شاشة PrintScreen');
+        toast('📸 تم تسجيل لقطة الشاشة', 2500);
+      }
+    });
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  //  5.  كشف DevTools (بدون إيقاف أي شيء)
+  // ════════════════════════════════════════════════════════════════
+  function _startDevToolsDetection(){
+    let wasOpen = false;
+    setInterval(()=>{
+      const bySize = window.outerWidth-window.innerWidth>175 || window.outerHeight-window.innerHeight>175;
+      if(bySize && !wasOpen){
+        wasOpen = true;
+        log('devtools_open','كُشف فتح DevTools');
+        tgAlert('🔧 تم فتح أدوات المطور على جهاز الديوان\n💻 '+navigator.userAgent.slice(0,70));
+      }
+      if(!bySize) wasOpen=false;
+    }, 2500);
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  //  6.  قفل التبويب (إذا تُرك البرنامج مفتوحاً بدون نشاط)
+  // ════════════════════════════════════════════════════════════════
+  let _tabTimer = null;
+  function _startTabGuard(){
+    document.addEventListener('visibilitychange',()=>{
+      if(document.hidden){
+        _tabTimer = setTimeout(()=>{
+          if(typeof triggerAutoLock==='function'){
+            log('tab_lock','قفل بسبب تبديل التبويب');
+            triggerAutoLock();
+          }
+        }, 20*60*1000); // 20 دقيقة
+      } else {
+        clearTimeout(_tabTimer);
+      }
+    });
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  //  7.  تنبيه الإغلاق بدون حفظ
+  // ════════════════════════════════════════════════════════════════
+  window.addEventListener('beforeunload', e=>{
+    if(typeof _saveTimer!=='undefined' && _saveTimer){
+      const msg = '⚠️ هناك تغييرات غير محفوظة — هل تريد الخروج؟';
+      e.returnValue = msg; return msg;
+    }
+  });
+
+  // ════════════════════════════════════════════════════════════════
+  //  8.  عرض سجل الأمان (للمدير فقط)
+  // ════════════════════════════════════════════════════════════════
+  function showAudit(){
+    const ts = localStorage.getItem('v22_backup_ts');
+    const content = `
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+        <div style="background:rgba(46,125,50,.18);border:1px solid rgba(46,125,50,.4);border-radius:10px;padding:10px;text-align:center">
+          <div style="font-size:18px;font-weight:700;color:#a5d6a7">${_auditLog.length}</div>
+          <div style="font-size:10px;color:#7cb342">حدث مسجّل</div>
+        </div>
+        <div style="background:rgba(21,101,192,.18);border:1px solid rgba(21,101,192,.4);border-radius:10px;padding:10px;text-align:center">
+          <div style="font-size:11px;font-weight:700;color:#90caf9">${ts?new Date(ts).toLocaleString('ar-DZ'):'لا توجد بعد'}</div>
+          <div style="font-size:10px;color:#5c8bc4">آخر نسخة احتياطية</div>
+        </div>
+      </div>
+      <div style="max-height:290px;overflow-y:auto">
+      ${_auditLog.length ? [..._auditLog].reverse().map(l=>{
+        const warn = /tamper|devtools|key_block|storage|screenshot|rightclick/.test(l.type);
+        return `<div style="border:1px solid ${warn?'rgba(198,40,40,.3)':'rgba(255,255,255,.07)'};border-radius:8px;padding:7px 10px;margin-bottom:5px;background:${warn?'rgba(198,40,40,.07)':'rgba(255,255,255,.03)'}">
+          <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px">
+            <span style="background:${warn?'rgba(198,40,40,.35)':'rgba(46,125,50,.35)'};color:${warn?'#f87171':'#a5d6a7'};border-radius:5px;padding:1px 8px;font-weight:700">${l.type}</span>
+            <span style="color:#546e7a">${l.t}</span>
+          </div>
+          ${l.detail?`<div style="font-size:10px;color:#9e9e9e">${l.detail}</div>`:''}
+        </div>`;
+      }).join('') : '<div style="text-align:center;color:#546e7a;padding:20px;font-size:11px">✅ لا توجد أحداث مريبة في هذه الجلسة</div>'}
+      </div>
+      <div style="margin-top:10px;display:flex;gap:7px;flex-wrap:wrap">
+        <button onclick="V22.autoBackup();toast('✅ تم الحفظ الاحتياطي الآن')" style="flex:1;min-width:120px;padding:8px;background:rgba(21,101,192,.2);border:1px solid rgba(21,101,192,.4);color:#90caf9;border-radius:8px;cursor:pointer;font-family:Tajawal,sans-serif;font-size:11px;font-weight:700">💾 نسخة الآن</button>
+        <button onclick="V22.restoreBackup()" style="flex:1;min-width:120px;padding:8px;background:rgba(46,125,50,.2);border:1px solid rgba(46,125,50,.4);color:#a5d6a7;border-radius:8px;cursor:pointer;font-family:Tajawal,sans-serif;font-size:11px;font-weight:700">📂 استعادة</button>
+        <button onclick="V22.checkUpdate(true)" style="flex:1;min-width:120px;padding:8px;background:rgba(156,39,176,.2);border:1px solid rgba(156,39,176,.4);color:#ce93d8;border-radius:8px;cursor:pointer;font-family:Tajawal,sans-serif;font-size:11px;font-weight:700">🔄 فحص تحديثات</button>
+      </div>`;
+    if(typeof showSecretPanel==='function') showSecretPanel('🛡️ مركز الأمان V22', '#1565c0', content);
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  //  9.  التشغيل الكامل (يُستدعى بعد الدخول الناجح)
+  // ════════════════════════════════════════════════════════════════
+  function init(){
+    _initDataProtection();
+    _startDevToolsDetection();
+    _startIntegrityCheck();
+    _startTabGuard();
+    // نسخة احتياطية أولى بعد 5 ثوان من الدخول
+    setTimeout(()=>{ autoBackup(); _lastChecksum = _calcChecksum(); }, 5000);
+    // نسخة احتياطية كل 20 دقيقة
+    setInterval(autoBackup, 20*60*1000);
+    // فحص تحديثات عند الدخول (إذا كان إنترنت)
+    setTimeout(()=>checkUpdate(false), 4000);
+    // شارة الإصدار في الهيدر
+    setTimeout(()=>{
+      const t2 = document.querySelector('.htxt .t2');
+      if(t2 && !document.getElementById('v22badge')){
+        const sp = document.createElement('span');
+        sp.id = 'v22badge';
+        sp.style.cssText = 'font-size:8px;background:rgba(156,39,176,.55);color:#e1bee7;border-radius:4px;padding:1px 5px;margin-right:3px;vertical-align:middle';
+        sp.textContent = 'V22';
+        t2.prepend(sp);
+      }
+    }, 800);
+    log('init','تم تشغيل V22 بنجاح — '+new Date().toLocaleTimeString('ar-DZ'));
+  }
+
+  // API العامة
+  return { init, checkUpdate, downloadUpdate, autoBackup, restoreBackup, showAudit };
+
+})(); // END V22
+
+// ── ربط V22 مع نقاط الدخول ────────────────────────────────────────
+
+// launchApp (شاشة الدخول البسيطة)
+const _origLaunchApp = window.launchApp;
+window.launchApp = function(){
+  if(_origLaunchApp) _origLaunchApp.apply(this, arguments);
+  setTimeout(()=>V22.init(), 600);
+};
+
+// checkCaptcha (الطبقة الخامسة من نظام الحماية 5-layer)
+const _origCheckCaptcha = window.checkCaptcha;
+if(typeof _origCheckCaptcha === 'function'){
+  window.checkCaptcha = function(){
+    _origCheckCaptcha.apply(this, arguments);
+    // V22.init() تُستدعى عبر launchApp الذي تستدعيه checkCaptcha
+  };
+}
 
 </script>
 </body>

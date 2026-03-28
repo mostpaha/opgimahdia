@@ -9719,6 +9719,95 @@ function showSecretPanel(title, color, content) {
 }
 
 
+// ═══════════════════════════════════════════
+// 🔄 نظام التحديث التلقائي — OPGI مهدية
+// ═══════════════════════════════════════════
+const CURRENT_VERSION = "V21";
+const GITHUB_RAW_URL = "https://raw.githubusercontent.com/mostpaha/opgimahdia/main/index.html";
+const GITHUB_API_URL = "https://api.github.com/repos/mostpaha/opgimahdia/commits/main";
+
+async function checkForUpdate() {
+  try {
+    const res = await fetch(GITHUB_API_URL, {cache: "no-store"});
+    if (!res.ok) return;
+    const data = await res.json();
+    const lastCommit = data.sha;
+    const savedCommit = localStorage.getItem("opgi_last_commit");
+
+    if (savedCommit && savedCommit !== lastCommit) {
+      showUpdateNotification(lastCommit);
+    } else if (!savedCommit) {
+      localStorage.setItem("opgi_last_commit", lastCommit);
+    }
+  } catch(e) {
+    console.log("تعذّر التحقق من التحديثات:", e);
+  }
+}
+
+function showUpdateNotification(newCommit) {
+  const div = document.createElement("div");
+  div.id = "updateNotif";
+  div.style.cssText = `
+    position:fixed;bottom:20px;left:20px;z-index:999999;
+    background:linear-gradient(135deg,#1565c0,#0d47a1);
+    border:2px solid #ffd54f;border-radius:16px;
+    padding:16px 20px;color:#fff;font-family:Tajawal,sans-serif;
+    box-shadow:0 8px 32px rgba(0,0,0,.4);max-width:320px;
+    animation:slideIn .4s ease;
+  `;
+  div.innerHTML = `
+    <div style="font-size:15px;font-weight:900;color:#ffd54f;margin-bottom:8px">🔄 يوجد تحديث جديد!</div>
+    <div style="font-size:12px;color:#bbdefb;margin-bottom:12px">تم رفع نسخة جديدة من البرنامج على الخادم.</div>
+    <div style="display:flex;gap:8px">
+      <button onclick="applyUpdate('${newCommit}')" style="flex:1;padding:8px;background:#ffd54f;color:#0d1b2a;border:none;border-radius:8px;font-family:Tajawal,sans-serif;font-weight:900;cursor:pointer;font-size:12px">✅ تحديث الآن</button>
+      <button onclick="document.getElementById('updateNotif').remove()" style="padding:8px 12px;background:rgba(255,255,255,.15);color:#fff;border:none;border-radius:8px;font-family:Tajawal,sans-serif;cursor:pointer;font-size:12px">لاحقاً</button>
+    </div>
+  `;
+  document.body.appendChild(div);
+}
+
+async function applyUpdate(newCommit) {
+  try {
+    const notif = document.getElementById("updateNotif");
+    if (notif) notif.innerHTML = `<div style="font-size:13px;color:#ffd54f;font-family:Tajawal,sans-serif">⏳ جاري تحميل التحديث...</div>`;
+
+    const res = await fetch(GITHUB_RAW_URL + "?t=" + Date.now(), {cache: "no-store"});
+    if (!res.ok) throw new Error("فشل التحميل");
+    const html = await res.text();
+
+    // حفظ البيانات قبل التحديث
+    const backup = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      backup[k] = localStorage.getItem(k);
+    }
+
+    // حفظ الـ commit الجديد
+    localStorage.setItem("opgi_last_commit", newCommit);
+
+    // إنشاء ملف HTML جديد وتحميله
+    const blob = new Blob([html], {type: "text/html"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "OPGI_Tiaret_updated.html";
+    a.click();
+    URL.revokeObjectURL(url);
+
+    if (notif) notif.innerHTML = `
+      <div style="font-family:Tajawal,sans-serif">
+        <div style="font-size:14px;font-weight:900;color:#ffd54f;margin-bottom:6px">✅ تم تحميل التحديث!</div>
+        <div style="font-size:11px;color:#bbdefb">افتح الملف المحمّل لاستخدام النسخة الجديدة.</div>
+      </div>
+    `;
+  } catch(e) {
+    alert("⚠️ فشل التحديث: " + e.message);
+  }
+}
+
+// تحقق من التحديث عند فتح البرنامج (بعد 3 ثواني)
+setTimeout(checkForUpdate, 3000);
+
 </script>
 </body>
 </html>

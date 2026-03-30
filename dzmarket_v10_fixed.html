@@ -527,8 +527,8 @@ footer { background:var(--gray-800); color:rgba(255,255,255,0.7); padding:40px 2
 /* ===== LOGIN SCREEN ===== */
 .login-screen {
   display:none; position:fixed; inset:0; z-index:9999;
-  align-items:center; justify-content:center; flex-direction:column;
-  overflow:hidden;
+  align-items:flex-start; justify-content:center; flex-direction:column;
+  overflow-y:auto; overflow-x:hidden;
   background:linear-gradient(160deg,#004d33 0%,#006644 35%,#00875A 65%,#005c38 100%);
 }
 .login-screen.show { display:flex; }
@@ -565,7 +565,9 @@ footer { background:var(--gray-800); color:rgba(255,255,255,0.7); padding:40px 2
 .login-center {
   position:relative; z-index:10000;
   display:flex; flex-direction:column; align-items:center;
-  width:100%; max-width:460px; padding:0 16px;
+  width:100%; max-width:460px; padding:16px 16px;
+  margin:auto;
+  pointer-events:auto !important;
 }
 /* العنوان الخارجي */
 .login-outer-title { text-align:center; margin-bottom:18px; }
@@ -603,7 +605,9 @@ footer { background:var(--gray-800); color:rgba(255,255,255,0.7); padding:40px 2
   box-shadow:0 24px 70px rgba(0,0,0,0.4);
   animation:modalIn 0.5s ease; position:relative; z-index:10001;
   border:2px solid rgba(255,255,255,0.25);
+  pointer-events:auto !important;
 }
+.login-box * { pointer-events:auto !important; }
 .login-logo { font-size:48px; margin-bottom:4px; }
 .login-sub { font-size:13px; font-weight:700; color:var(--gray-500); margin-bottom:20px; letter-spacing:1px; }
 #loginUsername, #loginPassword { position:relative; z-index:10002;
@@ -1068,6 +1072,26 @@ footer { background:var(--gray-800); color:rgba(255,255,255,0.7); padding:40px 2
 }
 </style>
 
+<!-- تنبيه المتصفح الداخلي للفيسبوك -->
+<div id="fbBrowserBanner" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:30px;">
+  <div style="background:white;border-radius:20px;padding:32px 28px;max-width:340px;width:100%;">
+    <div style="font-size:52px;margin-bottom:12px;">🌐</div>
+    <div style="font-size:20px;font-weight:900;color:#006644;margin-bottom:10px;font-family:'Tajawal',sans-serif;">افتح في المتصفح</div>
+    <div style="font-size:14px;color:#555;margin-bottom:20px;line-height:1.7;font-family:'Tajawal',sans-serif;">
+      التطبيق ما يشتغلش في متصفح الفيسبوك الداخلي.<br>
+      اضغط على النقاط <strong>⋮</strong> أو <strong>...</strong> واختر<br>
+      <strong>"فتح في المتصفح"</strong>
+    </div>
+    <div style="background:#f0f0f0;border-radius:10px;padding:12px;margin-bottom:16px;font-size:13px;color:#333;font-family:'Tajawal',sans-serif;">
+      📱 Chrome / Safari / Firefox
+    </div>
+    <button onclick="document.getElementById('fbBrowserBanner').style.display='none'" 
+      style="background:#006644;color:white;border:none;padding:12px 28px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:800;cursor:pointer;width:100%;">
+      متابعة على أي حال
+    </button>
+  </div>
+</div>
+
 <div class="login-screen" id="loginScreen">
 
   <!-- علم الجزائر — يسار -->
@@ -1144,20 +1168,29 @@ footer { background:var(--gray-800); color:rgba(255,255,255,0.7); padding:40px 2
     <!-- صندوق الدخول -->
     <div class="login-box">
 
-      <!-- صور المنتجات بجانب السلة -->
-      <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
-        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=80&q=70" style="width:52px;height:40px;object-fit:cover;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15);" alt="سيارة">
-        <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=80&q=70" style="width:52px;height:40px;object-fit:cover;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15);" alt="شاحنة">
+      <!-- إيموجيات المنتجات — صف علوي بجانب السلة -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:8px;flex-wrap:wrap;">
+        <div style="font-size:34px;width:52px;height:48px;background:var(--gray-100);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.1);">🚗</div>
+        <div style="font-size:34px;width:52px;height:48px;background:var(--gray-100);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.1);">🚛</div>
         <div class="login-logo" style="margin:0;font-size:42px;">🛒</div>
-        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=60&q=70" style="width:40px;height:52px;object-fit:cover;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15);" alt="هاتف">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=80&q=70" style="width:52px;height:40px;object-fit:cover;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15);" alt="دراجة">
+        <div style="font-size:34px;width:52px;height:48px;background:var(--gray-100);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.1);">📱</div>
+        <div style="font-size:34px;width:52px;height:48px;background:var(--gray-100);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.1);">💻</div>
       </div>
-      <div style="display:flex;justify-content:center;gap:6px;margin-bottom:4px;">
-        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=80&q=70" style="width:50px;height:36px;object-fit:cover;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.12);" alt="عقار">
-        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=80&q=70" style="width:50px;height:36px;object-fit:cover;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.12);" alt="أثاث">
-        <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=60&q=70" style="width:38px;height:50px;object-fit:cover;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.12);" alt="هاتف">
-        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=80&q=70" style="width:50px;height:36px;object-fit:cover;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.12);" alt="كمبيوتر">
-        <img src="https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?w=80&q=70" style="width:50px;height:36px;object-fit:cover;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.12);" alt="دراجة">
+      <!-- صف ثانٍ -->
+      <div style="display:flex;justify-content:center;gap:6px;margin-bottom:8px;">
+        <div style="font-size:28px;width:46px;height:42px;background:var(--gray-100);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.1);">🏠</div>
+        <div style="font-size:28px;width:46px;height:42px;background:var(--gray-100);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.1);">🛋️</div>
+        <div style="font-size:28px;width:46px;height:42px;background:var(--gray-100);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.1);">👗</div>
+        <div style="font-size:28px;width:46px;height:42px;background:var(--gray-100);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.1);">🍳</div>
+        <div style="font-size:28px;width:46px;height:42px;background:var(--gray-100);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.1);">🔧</div>
+      </div>
+      <!-- صف ثالث -->
+      <div style="display:flex;justify-content:center;gap:6px;margin-bottom:10px;">
+        <div style="font-size:28px;width:46px;height:42px;background:var(--gray-100);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.1);">🚗</div>
+        <div style="font-size:28px;width:46px;height:42px;background:var(--gray-100);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.1);">🚛</div>
+        <div style="font-size:28px;width:46px;height:42px;background:var(--gray-100);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.1);">📱</div>
+        <div style="font-size:28px;width:46px;height:42px;background:var(--gray-100);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.1);">💻</div>
+        <div style="font-size:28px;width:46px;height:42px;background:var(--gray-100);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,0.1);">🚙</div>
       </div>
 
       <!-- تبويب دخول / تسجيل -->
@@ -1190,13 +1223,11 @@ footer { background:var(--gray-800); color:rgba(255,255,255,0.7); padding:40px 2
             onkeydown="if(event.key==='Enter')doLogin()">
         </div>
 
-        <!-- اختيار من القائمة -->
-        <div style="text-align:center;margin-bottom:14px;">
-          <span onclick="toggleSelectPanel()" style="font-size:12px;color:var(--green);font-weight:800;cursor:pointer;">📋 أو اختر من قائمة المستخدمين</span>
-        </div>
-        <div id="loginPanelSelect" style="display:none;margin-bottom:14px;">
+        <!-- اختيار من القائمة — ظاهر دائماً -->
+        <div style="margin-bottom:14px;">
+          <label class="login-label-bold">📋 اختر من القائمة</label>
           <div class="user-select-wrap">
-            <select id="userSelect" onchange="onUserSelect()">
+            <select id="userSelect" onchange="onUserSelect()" style="width:100%;padding:11px 14px;border:2px solid var(--gray-200);border-radius:var(--radius-sm);font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;color:var(--gray-800);background:var(--gray-50);outline:none;direction:rtl;cursor:pointer;transition:border 0.2s;" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--gray-200)'">
               <option value="">— اختر مستخدماً —</option>
             </select>
           </div>
@@ -3272,12 +3303,16 @@ function onUserSelect() {
   const badge = document.getElementById('roleBadge');
   const u = DZ_USERS.find(x => x.username === sel.value);
   if (!u) { badge.style.display = 'none'; return; }
+  // ملأ تلقائي لاسم المستخدم وكلمة السر
+  const unEl = document.getElementById('loginUsername');
+  const pwEl = document.getElementById('loginPassword');
+  if (unEl) unEl.value = u.username;
+  if (pwEl) pwEl.value = u.password;
+  // شارة الدور
   badge.style.display = 'block';
-  badge.innerHTML = `<span class="user-role-badge ${u.role === 'admin' ? 'role-admin' : 'role-user'}">
+  badge.innerHTML = `<span class="user-role-badge ${u.role === 'admin' ? 'role-admin' : 'role-user'}" style="display:inline-block;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:900;">
     ${u.role === 'admin' ? '👑 مدير' : '👤 مستخدم'} — ${u.label}
   </span>`;
-  // أظهر حقل كلمة السر بالتركيز
-  setTimeout(() => document.getElementById('loginPassword').focus(), 50);
 }
 
 let loginTabMode = 'manual';
@@ -3301,10 +3336,7 @@ function switchMainTab(tab) {
   }, 100);
 }
 
-function toggleSelectPanel() {
-  const el = document.getElementById('loginPanelSelect');
-  el.style.display = el.style.display === 'none' ? 'block' : 'none';
-}
+function toggleSelectPanel() { /* not used anymore */ }
 
 function switchLoginTab(mode) { /* kept for compatibility */ }
 
@@ -4599,5 +4631,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<script>
+// كشف متصفح الفيسبوك الداخلي
+(function() {
+  var ua = navigator.userAgent || '';
+  var isFbBrowser = ua.indexOf('FBAN') > -1 || ua.indexOf('FBAV') > -1 || 
+                    ua.indexOf('FB_IAB') > -1 || ua.indexOf('FBIOS') > -1 ||
+                    ua.indexOf('Instagram') > -1;
+  if (isFbBrowser) {
+    var banner = document.getElementById('fbBrowserBanner');
+    if (banner) banner.style.display = 'flex';
+  }
+})();
+</script>
 </body>
 </html>
